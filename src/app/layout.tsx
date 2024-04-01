@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ChatPlugin } from "@/components/chat-pluggin";
 import { cn } from "@/lib/utils";
+import { Header } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "")}>
+      <body className={cn(inter.className, "bg-color_blue")}>
+        <Header/>
         {children}
         <ChatPlugin/>
       </body>

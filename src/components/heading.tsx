@@ -1,0 +1,16 @@
+import { lemon } from "@/fonts";
+import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
+import { WhileInView } from "./while-in-view";
+interface HeadingProps {
+  className?: string;
+  children: ReactNode;
+}
+
+export const Heading = ({ className, children }: HeadingProps) => {
+  return (
+    <WhileInView y={200} duration={0.8}>
+      <h1 className={cn(lemon.className, "font-bold text-7xl")}>{children}</h1>
+    </WhileInView>
+  );
+};
