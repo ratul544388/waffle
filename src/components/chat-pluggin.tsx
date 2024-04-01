@@ -12,7 +12,7 @@ export const ChatPluggin = () => {
 
   return (
      <div>
-        ChatPluggin
+        
      </div>
     );
 }
