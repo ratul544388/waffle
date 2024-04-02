@@ -1,11 +1,10 @@
 "use client";
 
-import { Image } from "./image";
-import { motion } from "framer-motion";
-import { WhileInView } from "./while-in-view";
-import { useWindowSize } from "usehooks-ts";
-import { cn } from "@/lib/utils";
 import { caprasimo, potta_one } from "@/fonts";
+import { cn } from "@/lib/utils";
+import { useWindowSize } from "usehooks-ts";
+import { Image } from "./image";
+import { WhileInView } from "./while-in-view";
 
 interface FoodItemProps {
   image: string;
@@ -30,7 +29,7 @@ export const FoodItem = ({ image, name, price }: FoodItemProps) => {
       <h3
         className={cn(
           potta_one.className,
-          "font-extrabold sm:text-lg md:text-xl mt-8"
+          "font-extrabold uppercase sm:text-lg md:text-xl mt-8"
         )}
       >
         {name}

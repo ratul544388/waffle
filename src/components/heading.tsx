@@ -10,7 +10,7 @@ interface HeadingProps {
 export const Heading = ({ className, children }: HeadingProps) => {
   return (
     <WhileInView y={200} duration={0.8}>
-      <h1 className={cn(lemon.className, "font-bold text-7xl")}>{children}</h1>
+      <h1 className={cn(lemon.className, "font-bold text-center text-8xl text-orange-950")}>{children}</h1>
     </WhileInView>
   );
 };
