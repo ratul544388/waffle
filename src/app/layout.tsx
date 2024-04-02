@@ -1,11 +1,12 @@
+import { ChatPlugin } from "@/components/chat-pluggin";
+import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ChatPlugin } from "@/components/chat-pluggin";
-import { cn } from "@/lib/utils";
-import { Header } from "@/components/header";
-
-const inter = Inter({ subsets: ["latin"] });
+import { fontsClass } from "@/fonts";
+import { ModalProvider } from "@/providers/modal-provider";
+import { ToastProvider } from "@/providers/toast-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,10 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "bg-color_blue")}>
-        <Header/>
+      <body className={cn(fontsClass, "bg-color_choklet font-lemon")}>
+        <Header />
         {children}
-        <ChatPlugin/>
+        <ChatPlugin />
+        <ModalProvider />
+        <ToastProvider />
       </body>
     </html>
   );

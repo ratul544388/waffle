@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/container";
-import { lemon, potta_one } from "@/fonts";
+import { useCrisp } from "@/hooks/use-crips";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -20,6 +20,7 @@ const staggerVariants = {
 };
 
 export const AddOns = () => {
+  const { sendMessage } = useCrisp();
   const addOnItems = [
     {
       label: "ice-cream",
@@ -41,9 +42,11 @@ export const AddOns = () => {
   return (
     <Container
       element="section"
-      className="flex flex-col mt-10 w-fit items-center border-[5px] border-orange-950 rounded-br-2xl rounded-tl-2xl py-3 px-5"
+      className="flex flex-col mt-10 w-fit items-center border-[5px] border-orange-950 rounded-br-2xl rounded-tl-2xl py-3 px-5 bg-neutral-900/40 backdrop-blur-lg"
     >
-      <h2 className={cn(lemon.className, "text-white text-2xl")}>ADD-ONS</h2>
+      <h2 onClick={sendMessage} className={cn("text-color_green text-2xl")}>
+        ADD-ONS
+      </h2>
       <motion.ul
         variants={staggerVariants}
         initial="initial"
@@ -57,7 +60,11 @@ export const AddOns = () => {
             key={label}
             className="flex gap-2"
           >
-            <h4 className={cn(potta_one.className, "text-lg capitalize")}>
+            <h4
+              className={cn(
+                "text-lg text-color_green capitalize"
+              )}
+            >
               {label}
             </h4>
             <p className="font-bold text-lg text-white">BDT {price}</p>

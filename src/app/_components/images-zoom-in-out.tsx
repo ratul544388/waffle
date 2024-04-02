@@ -61,7 +61,7 @@ export const ImagesZoomInOut = ({}: ImagesZoomInOutProps) => {
           exit="exit"
           transition={{ duration: 0.5 }}
           className={cn(
-            "w-full max-w-[200px] sm:max-w-[250px] absolute aspect-square",
+            "w-full max-w-[200px] sm:max-w-[300px] absolute aspect-square",
             !isIntersecting && "hidden"
           )}
         >

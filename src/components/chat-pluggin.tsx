@@ -9,6 +9,7 @@ export const ChatPlugin = () => {
       autoload: false,
     });
     Crisp.chat.show();
+
   }, []);
 
   return <div></div>;

@@ -19,7 +19,7 @@ export const Header = () => {
         className="w-full hidden sm:flex items-center justify-center"
       >
         <Image
-          src="/logo_desktop.png"
+          src="/logos/desktop.png"
           alt="Logo"
           className={cn("aspect-[401/92] max-w-[200px] mt-3")}
         />
