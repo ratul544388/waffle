@@ -1,16 +1,14 @@
 "use client";
 
-import { Crisp } from "crisp-sdk-web";
+import { useCrisp } from "@/hooks/use-crips";
 import { useEffect } from "react";
 
 export const ChatPlugin = () => {
-  useEffect(() => {
-    Crisp.configure("9ed0fbbc-ff1f-434b-b619-053d6534da47", {
-      autoload: false,
-    });
-    Crisp.chat.show();
+  const { show } = useCrisp();
 
-  }, []);
+  useEffect(() => {
+    show();
+  }, [show]);
 
   return <div></div>;
 };

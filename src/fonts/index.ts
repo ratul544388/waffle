@@ -1,9 +1,8 @@
 import {
-  Caprasimo,
   Inter,
+  Caprasimo,
   Lemon,
   Potta_One,
-  Lora,
 } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -27,10 +26,7 @@ const caprasimo = Caprasimo({
   adjustFontFallback: false,
 });
 
-const lora = Lora({
-  subsets: ["latin"],
-  variable: "--font-Lora",
-  adjustFontFallback: false,
-});
 
-export const fontsClass = `${inter.variable} ${potta_one.variable} ${lemon.variable} ${caprasimo.variable} ${lora.variable}`;
+// export const fontsClass = `${inter.variable}`
+
+export const fontsClass = `${inter.variable} ${potta_one.variable} ${lemon.variable} ${caprasimo.variable}`;

@@ -8,7 +8,7 @@ export const Hero = () => {
   return (
     <Container
       element="section"
-      className="bg-color_primary h-screen w-full flex flex-col-reverse sm:flex-row gap-10 items-center justify-center pb-16 px-8"
+      className="bg-color_background -translate-y-7 z-30 h-screen w-full flex flex-col-reverse sm:flex-row gap-10 items-center justify-center pb-16 px-8"
     >
       <Image
         src="/hero_text.png"

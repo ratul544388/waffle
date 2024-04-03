@@ -1,36 +1,37 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { Container } from "@/container";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { CartSheet } from "./cart-sheet";
 import { Image } from "./image";
 import { WhileInView } from "./while-in-view";
 
 export const Header = () => {
   return (
-    <header className="flex justify-center">
-      <motion.span
-        initial={{ y: -30, opacity: 0 }}
-        whileInView={{ y: -8, opacity: 1 }}
-        viewport={{ once: true }}
-        className="absolute inset-x-0 h-16 bg-color_pink sm:hidden"
-      />
-      <WhileInView
-        y={-30}
-        className="w-full hidden sm:flex items-center justify-center"
-      >
-        <Image
-          src="/logos/desktop.png"
-          alt="Logo"
-          className={cn("aspect-[401/92] max-w-[200px] mt-3")}
-        />
-      </WhileInView>
-      <WhileInView
-        scale={0}
-        delay={0.5}
-        className="flex sm:hidden w-full items-center justify-center"
-      >
-        <Image src="/logo_mobile.webp" alt="Logo" className="w-20" />
-      </WhileInView>
-    </header>
+    <motion.header
+      animate={{ opacity: [0, 1], y: [-40, 0], transition: { duration: 0.4 } }}
+      className="flex sticky top-0 z-50 opacity-0 overflow-hidden w-full h-20"
+    >
+      <span className="absolute inset-x-0 h-[65px] bg-color_pink -translate-y-3" />
+      <Container className="flex justify-between">
+        <span />
+        <Link
+          href="/"
+          className="absolute left-1/2 -translate-x-1/2 top-0 rounded-full"
+        >
+          <WhileInView
+            scale={0}
+            delay={0.6}
+            className="bg-color_blue rounded-full"
+          >
+            <Image src="/logos/logo.png" alt="logo" className="size-20" />
+          </WhileInView>
+        </Link>
+        <WhileInView x={30} delay={0.6} className="mt-1.5">
+          <CartSheet />
+        </WhileInView>
+      </Container>
+    </motion.header>
   );
 };

@@ -1,8 +1,12 @@
+import { FoodItem } from "@/components/food-item";
+import { Food, OrderItem } from "@/types";
 import { create } from "zustand";
 
 export type ModalType = "orderModal";
 interface ModalData {
   name?: string;
+  orderItems?: OrderItem[];
+  clearCart?: boolean;
 }
 
 interface ModalStore {

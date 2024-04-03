@@ -1,11 +1,10 @@
 import { ChatPlugin } from "@/components/chat-pluggin";
 import { Header } from "@/components/header";
-import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { fontsClass } from "@/fonts";
+import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/providers/modal-provider";
+import type { Metadata } from "next";
+import "./globals.css";
 import { ToastProvider } from "@/providers/toast-provider";
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(fontsClass, "bg-color_choklet font-lemon")}>
+      <body className={cn(fontsClass, "bg-color_background font-inter")}>
         <Header />
         {children}
         <ChatPlugin />

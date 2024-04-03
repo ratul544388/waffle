@@ -27,6 +27,7 @@ const config = {
       },
       colors: {
         color_choklet: "#72585D",
+        color_background: "#323031",
         color_green: "#ACDDA8",
         color_purple: "#C269DB",
         color_blue: "#6DCCD8",

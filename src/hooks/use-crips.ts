@@ -4,6 +4,8 @@ import * as z from "zod";
 import { Crisp } from "crisp-sdk-web";
 import { useEffect } from "react";
 import { OrderSchema } from "@/validations";
+import { OrderItem, User } from "@/types";
+import { calculateTotal, formatPrice } from "@/lib/utils";
 
 export const useCrisp = () => {
   useEffect(() => {
@@ -16,13 +18,33 @@ export const useCrisp = () => {
     Crisp.chat.close();
   };
 
-  const createOrder = ({
-    name,
-    phone,
-    address,
-  }: z.infer<typeof OrderSchema>) => {
-    Crisp.message.send("text", `Order Info\n${name}\n${phone}\n${address}`);
+  const show = () => {
+    Crisp.chat.show();
   };
 
-  return { hideChat, createOrder };
+  const createOrder = ({
+    user: { name, address, phone },
+    orderItems,
+  }: {
+    user: User;
+    orderItems: OrderItem[];
+  }) => {
+    const separator = `----------------`;
+    const userInfo = `Name: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+    const orderDetails = `${orderItems
+      .map(
+        ({ food: { name }, quantity }, index) =>
+          `${index + 1}: ${name} - Qty: ${quantity}\n`
+      )
+      .join(" ")
+      .toString()}`;
+    const total = calculateTotal(orderItems);
+    const message = `Order Info:\n${separator}\n${userInfo}\n${separator}\nOrders (${
+      orderItems.length
+    } items):\n${orderDetails}\n${separator}\nTotal: ${formatPrice(total)}`;
+
+    Crisp.message.send("text", message);
+  };
+
+  return { hideChat, createOrder, show };
 };

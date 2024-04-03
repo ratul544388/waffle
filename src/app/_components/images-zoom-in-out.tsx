@@ -50,7 +50,7 @@ export const ImagesZoomInOut = ({}: ImagesZoomInOutProps) => {
   return (
     <div
       ref={ref}
-      className="relative w-full max-w-[250px] aspect-square flex items-center justify-center"
+      className="relative w-full max-w-[300px] aspect-square flex items-center justify-center"
     >
       <AnimatePresence>
         <motion.div
@@ -61,7 +61,7 @@ export const ImagesZoomInOut = ({}: ImagesZoomInOutProps) => {
           exit="exit"
           transition={{ duration: 0.5 }}
           className={cn(
-            "w-full max-w-[200px] sm:max-w-[300px] absolute aspect-square",
+            "w-full absolute aspect-square",
             !isIntersecting && "hidden"
           )}
         >
