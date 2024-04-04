@@ -45,7 +45,7 @@ export const CartSheet = ({}: CartSheetProps) => {
       <SheetTrigger asChild>
         <Button
           size="icon"
-          className="relative bg-transparent hover:bg-white/10"
+          className="relative bg-transparent text-white hover:bg-white/10"
         >
           <ShoppingCart className="size-6" />
           <span className="absolute top-1 right-1 bg-color_blue rounded-full font-medium text-xs size-4">
@@ -75,8 +75,8 @@ export const CartSheet = ({}: CartSheetProps) => {
         <Separator />
         <div className="py-3 px-5">
           <div className="flex justify-between text-muted-foreground font-medium text-lg">
-            <h4>Total:</h4>
-            <p className="font-bold text-blue-500">{formatPrice(total)}</p>
+            <h4 className="font-semibold">TOTAL</h4>
+            <p className="font-bold text-white">{formatPrice(total)}</p>
           </div>
           <Button
             disabled={!!!cart.length}

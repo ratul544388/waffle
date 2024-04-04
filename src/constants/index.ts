@@ -1,3 +1,6 @@
+export const websiteName = "Waffle and Muscle Juice Bar";
+export const phone = "01434343232";
+
 export const wafflesItems = [
   {
     id: "1",
@@ -5,6 +8,7 @@ export const wafflesItems = [
     image: "/foods/1.png",
     name: "Fruity Bliss",
     price: 240,
+    type: "Waffles",
   },
   {
     id: "2",
@@ -12,6 +16,7 @@ export const wafflesItems = [
     image: "/foods/2.png",
     name: "Bananatella & nuts",
     price: 240,
+    type: "Waffles",
   },
   {
     id: "3",
@@ -19,6 +24,7 @@ export const wafflesItems = [
     image: "/foods/3.png",
     name: "Bangla Pizza",
     price: 240,
+    type: "Waffles",
   },
   {
     id: "4",
@@ -26,6 +32,7 @@ export const wafflesItems = [
     image: "/foods/1.png",
     name: "Fruity Bliss",
     price: 240,
+    type: "Juices",
   },
   {
     id: "5",
@@ -33,6 +40,7 @@ export const wafflesItems = [
     image: "/foods/2.png",
     name: "Fruity Bliss",
     price: 240,
+    type: "Juices",
   },
   {
     id: "6",
@@ -40,29 +48,39 @@ export const wafflesItems = [
     image: "/foods/3.png",
     name: "Fruity Bliss",
     price: 240,
+    type: "Juices",
+  },
+]
+
+export const foodTypes = [
+  {
+    label: "Waffles",
+    slug: "waffles",
+  },
+  {
+    label: "Juices",
+    slug: "juices",
+  },
+]
+
+export const servings = [
+  {
+    label: "Chunkutia",
+    map: "#",
   },
 ];
 
-export const waffleStickItems = [
+export const deliveryPartners = [
   {
-    id: "7",
-    slug: "food-7",
-    image: "/foods/3.png",
-    name: "Nutella",
-    price: 160,
+    label: "Foodpanda",
+    href: "#",
+    image: "/delivery-partners/foodpanda.png",
   },
   {
-    id: "8",
-    slug: "food-8",
-    image: "/foods/2.png",
-    name: "Red velvet",
-    price: 160,
-  },
-  {
-    id: "9",
-    slug: "food-9",
-    image: "/foods/2.png",
-    name: "Nutella",
-    price: 160,
+    label: "Pathaw",
+    href: "#",
+    image: "/delivery-partners/pathaw.png",
   },
 ];
+
+export const deliveryAvailable = ["Kalogonj", "Zinzira"];

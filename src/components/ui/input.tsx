@@ -18,7 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           placeholder=" "
           type={type}
           className={cn(
-            "peer flex h-[3.2rem] bg-secondary hover:bg-gray-200/60 focus:bg-secondary w-full rounded-md border border-input px-3 py-1 pt-3 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 ring-green-400 focus-visible:ring-offset-2 focus-visible:ring-emerald-400 disabled:cursor-not-allowed disabled:opacity-50",
+            "peer flex h-[3.2rem] bg-secondary hover:bg-accent w-full rounded-md border border-input px-3 py-1 pt-3 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-offset-accent focus-visible:ring-1 ring-primary focus-visible:ring-offset-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50",
             phone && "pl-16",
             className
           )}

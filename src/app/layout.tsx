@@ -1,11 +1,15 @@
 import { ChatPlugin } from "@/components/chat-pluggin";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { fontsClass } from "@/fonts";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/providers/modal-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import "./globals.css";
-import { ToastProvider } from "@/providers/toast-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,14 +22,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn(fontsClass, "bg-color_background font-inter")}>
-        <Header />
-        {children}
-        <ChatPlugin />
-        <ModalProvider />
-        <ToastProvider />
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
+      <html lang="en">
+        <body className={cn(fontsClass, "bg-background font-inter")}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="min-h-screen h-full pt-3">{children}</main>
+            <Footer />
+            <ChatPlugin />
+            <ModalProvider />
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

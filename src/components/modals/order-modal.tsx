@@ -23,7 +23,6 @@ import { OrderSchema } from "@/validations";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Check, EditIcon, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { MotionButton } from "../motion-button";
 import { OrderItem } from "../order-item";
 import { Button } from "../ui/button";
@@ -33,14 +32,16 @@ import {
   DialogDescription,
   DialogHeader,
 } from "../ui/dialog";
+import { toast } from "sonner";
 
 export const OrderModal = () => {
   const { isOpen, onClose, type, data } = useModalStore();
+  const { openChat } = useCrisp();
   const { clearCart } = useCartStore();
   const { orders } = useOrderStore();
   const { createOrder } = useCrisp();
   const [isEditingUserInfo, setIsEditingUserInfo] = useState(false);
-  const [hasLocalUser, setHasLocalUser] = useState(false);
+  const [user, setUser] = useState(false);
 
   const form = useForm<z.infer<typeof OrderSchema>>({
     resolver: zodResolver(OrderSchema),
@@ -64,12 +65,16 @@ export const OrderModal = () => {
         JSON.stringify({ name, phone, address })
       );
       setIsEditingUserInfo(false);
+      toast.success("User info saved");
     } else {
       createOrder({ user: values, orderItems: orders });
       toast.success(
         "Your order was created. Thanks for ordering. We'll call you for the confirmation"
       );
-      localStorage.setItem("waffle-user", JSON.stringify(values));
+      openChat();
+      if (!user) {
+        localStorage.setItem("waffle-user", JSON.stringify(values));
+      }
       if (data.clearCart) {
         clearCart();
       }
@@ -86,7 +91,7 @@ export const OrderModal = () => {
       localStorage.getItem("waffle-user") as string
     );
     if (user) {
-      setHasLocalUser(true);
+      setUser(true);
       const { name, phone, address } = user;
       form.reset({
         name,
@@ -117,10 +122,10 @@ export const OrderModal = () => {
           <form
             className={cn(
               "flex flex-col gap-6 px-5 py-2",
-              isEditingUserInfo && "pt-14"
+              isEditingUserInfo && "pt-12"
             )}
           >
-            {hasLocalUser && !isEditingUserInfo && (
+            {user && !isEditingUserInfo && (
               <ul className="flex flex-col items-start relative bg-secondary text-muted-foreground border rounded-xl p-4 text-xs font-medium font-inter">
                 {[name, phone, address].map((item, index) => (
                   <li key={index} className="line-clamp-1 text-start">
@@ -131,14 +136,14 @@ export const OrderModal = () => {
                   type="button"
                   onClick={() => setIsEditingUserInfo(true)}
                   variant="ghost"
-                  className="rounded-full absolute text-blue-500 hover:text-blue-500/90 right-2 top-1.5 hover:bg-blue-100"
+                  className="rounded-full absolute text-blue-500 hover:text-blue-500/90 right-2 top-1.5 hover:bg-accent"
                   size="icon"
                 >
                   <EditIcon className="size-4" />
                 </Button>
               </ul>
             )}
-            {(isEditingUserInfo || !hasLocalUser) && (
+            {(isEditingUserInfo || !user) && (
               <div className="flex flex-col gap-6 relative">
                 <FormField
                   control={form.control}
@@ -176,17 +181,20 @@ export const OrderModal = () => {
                     </FormItem>
                   )}
                 />
-                <Button
-                  type="button"
-                  onClick={form.handleSubmit((values) =>
-                    onSubmit({ values, saveUser: true })
-                  )}
-                  variant="ghost"
-                  className="rounded-full absolute text-black hover:text-black right-2 top-0 -translate-y-[calc(100%_+_10px)] bg-green-200 hover:bg-green-300"
-                  size="icon"
-                >
-                  <Check className="size-4" />
-                </Button>
+                <div className="flex items-center justify-between absolute top-0 inset-x-0 -translate-y-[calc(100%_+_8px)]">
+                  <p className="font-medium text-sm">Update Your Info</p>
+                  <Button
+                    type="button"
+                    onClick={form.handleSubmit((values) =>
+                      onSubmit({ values, saveUser: true })
+                    )}
+                    variant="ghost"
+                    className="rounded-full text-black hover:text-black bg-green-500 hover:bg-green-500/90"
+                    size="icon"
+                  >
+                    <Check className="size-4" />
+                  </Button>
+                </div>
               </div>
             )}
             <ul className="space-y-4">

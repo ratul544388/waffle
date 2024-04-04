@@ -8,7 +8,9 @@ export type Food = {
   id: string;
   image: string;
   name: string;
+  slug: string;
   price: number;
+  type: string;
 };
 
 export type CartItem = {

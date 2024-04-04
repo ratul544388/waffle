@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id     String @id @default(cuid())
+  userId String @unique
+  name   String
+  email  String @unique
+  image  String
+  role   Role   @default(USER)
+  mode   Role   @default(USER)
+}
+
+model Food {
+  id    String   @id @default(cuid())
+  name  String   @unique
+  slug  String   @unique
+  image String
+  type  String
+  extra String[]
+  price Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}

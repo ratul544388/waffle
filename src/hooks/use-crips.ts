@@ -22,6 +22,10 @@ export const useCrisp = () => {
     Crisp.chat.show();
   };
 
+  const openChat = () => {
+    Crisp.chat.open();
+  }
+
   const createOrder = ({
     user: { name, address, phone },
     orderItems,
@@ -46,5 +50,5 @@ export const useCrisp = () => {
     Crisp.message.send("text", message);
   };
 
-  return { hideChat, createOrder, show };
+  return { hideChat, createOrder, show, openChat };
 };
