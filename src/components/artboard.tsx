@@ -5,7 +5,7 @@ import { Image } from "./image";
 
 export const Artboard = () => {
   const { scrollYProgress } = useScroll();
-  const transform = useTransform(scrollYProgress, [0, 1], ["0", "-100%"]);
+  const transform = useTransform(scrollYProgress, [0, 1], ["0", "-50%"]);
   return (
     <motion.div
       animate={{ opacity: [0, 1] }}

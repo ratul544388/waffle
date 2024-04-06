@@ -4,12 +4,14 @@ import { getFoods } from "@/actions/foods";
 import { cn, formatPrice, getSlugFromType } from "@/lib/utils";
 import { Food } from "@prisma/client";
 import { motion } from "framer-motion";
+import { ImSpinner3 } from "react-icons/im";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useDebounceValue, useOnClickOutside } from "usehooks-ts";
 import { Image } from "./image";
+import { SearchLoader } from "./search-loader";
 
 export const SearchInput = ({
   className,
@@ -33,14 +35,12 @@ export const SearchInput = ({
     if (debouncedValue) {
       startTransition(() => {
         getFoods({ q: debouncedValue, take: 5 }).then((res) => {
-          setOpen(!!res.length);
           setResults(res);
         });
       });
-    } else {
-      setOpen(false);
     }
-  }, [debouncedValue]);
+    setOpen(!!value);
+  }, [debouncedValue, value]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ export const SearchInput = ({
     >
       <input
         ref={inputRef}
-        onFocus={() => setOpen(!!results.length)}
+        onFocus={() => setOpen(!!value)}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Search waffles and Juices"
@@ -75,10 +75,9 @@ export const SearchInput = ({
         <Search className="size-4" />
       </button>
       {open && (
-        <motion.div
+        <div
           ref={targetRef}
-          animate={{ scale: [0.9, 1] }}
-          className="absolute inset-x-0 rounded-md bg-secondary border py-3 top-full mt-1"
+          className="flex flex-col absolute overflow-hidden inset-x-0 rounded-md bg-secondary border py-3 top-full mt-1"
         >
           {results.map(({ id, name, image, slug, type, price }) => (
             <Link
@@ -94,7 +93,15 @@ export const SearchInput = ({
               </div>
             </Link>
           ))}
-        </motion.div>
+          {!!!results.length && (
+            <p className="text-muted-foreground font-medium px-3 text-center">
+              No results found!
+            </p>
+          )}
+          {isPending && (
+            <ImSpinner3 className="size-4 absolute top-1.5 right-2 animate-spin text-muted-foreground" />
+          )}
+        </div>
       )}
     </form>
   );
