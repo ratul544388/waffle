@@ -1,23 +1,15 @@
 "use client";
 
+import { foodTypes } from "@/constants";
 import { cn } from "@/lib/utils";
-import { Food } from "@/types";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
 import { useOnClickOutside, useWindowSize } from "usehooks-ts";
 import { Image } from "./image";
 import { WhileInView } from "./while-in-view";
-import { foodTypes } from "@/constants";
+import { Food } from "@prisma/client";
 
-const variants = {
-  initial: {
-    height: 0,
-  },
-  animate: {
-    height: "auto",
-  },
-};
 
 interface FoodItemProps {
   food: Food;
@@ -55,13 +47,15 @@ export const FoodItem = ({ food }: FoodItemProps) => {
         <Image src={food.image} alt={food.name} />
         <h3
           className={cn(
-            "font-extrabold uppercase sm:text-lg md:text-xl mt-8 font-lemon"
+            "font-extrabold text-center uppercase text-lg sm:text-xl md:text-2xl mt-8 font-bungee_spice"
           )}
         >
           {food.name}
         </h3>
         <p
-          className={cn("font-bold sm:text-lg md:text-xl mt-3 font-caprasimo")}
+          className={cn(
+            "font-bold md:text-lg mt-3 font-abril_fatface"
+          )}
         >
           {food.price} BDT
         </p>

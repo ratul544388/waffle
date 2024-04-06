@@ -1,4 +1,4 @@
-import { OrderItem } from "@/types";
+import { Extra, OrderItem } from "@/types";
 import { create } from "zustand";
 
 interface OrderStore {
@@ -11,7 +11,14 @@ interface OrderStore {
     orderItemId: string;
     quantity: number;
   }) => void;
-  deleteOrder: (cartItemId: string) => void;
+  deleteOrder: (orderItemId: string) => void;
+  addExtra: ({
+    orderItemId,
+    extras,
+  }: {
+    orderItemId: string;
+    extras: Extra[];
+  }) => void;
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
@@ -32,5 +39,17 @@ export const useOrderStore = create<OrderStore>((set) => ({
   deleteOrder: (orderItemId) =>
     set((state) => ({
       orders: state.orders.filter((item) => item.id !== orderItemId),
+    })),
+  addExtra: ({
+    extras,
+    orderItemId,
+  }: {
+    extras: Extra[];
+    orderItemId: string;
+  }) =>
+    set((state) => ({
+      orders: state.orders.map((order) =>
+        order.id === orderItemId ? { ...order, extras } : order
+      ),
     })),
 }));

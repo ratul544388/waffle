@@ -10,21 +10,25 @@ interface BreadCrumbsProps {
     label: string;
     href?: string;
   }[];
+  animate?: boolean;
 }
 
-export const BreadCrumbs = ({ items }: BreadCrumbsProps) => {
+export const BreadCrumbs = ({ items, animate = true }: BreadCrumbsProps) => {
   return (
     <nav className="flex items-center gap-2">
       <ul className="flex items-center gap-2 text-sm font-medium truncate">
         {items.map(({ label, href }, index) => (
           <motion.li
-            animate={{
-              opacity: [0, 1],
-              x: [-50, 0],
-              transition: { delay: index * 0.08, duration: 0.5 },
+            variants={{
+              animate: {
+                opacity: [0, 1],
+                x: [-50, 0],
+                transition: { delay: index * 0.08, duration: 0.5 },
+              },
             }}
+            animate={animate && "animate"}
             key={label}
-            className="flex opacity-0 items-center gap-2"
+            className={cn("flex items-center gap-2", animate && "opacity-0")}
           >
             <Link
               href={href || ""}

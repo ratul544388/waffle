@@ -1,12 +1,11 @@
 "use client";
 
 import { useCartStore } from "@/hooks/use-cart";
-import { MotionButton } from "./motion-button";
-import { Food } from "@/types";
+import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { Image } from "./image";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { MotionButton } from "./motion-button";
+import { Food } from "@prisma/client";
 
 export const AddToCartButton = ({ food }: { food: Food }) => {
   const { addToCart } = useCartStore();

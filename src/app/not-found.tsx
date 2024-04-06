@@ -1,5 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
-import { Container } from "@/container";
+import { Container } from "@/components/container";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 

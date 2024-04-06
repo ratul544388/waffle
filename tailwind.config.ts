@@ -21,9 +21,8 @@ const config = {
       fontFamily: {
         inter: ["var(--font-inter)"],
         lemon: ["var(--font-lemon)"],
-        potta_one: ["var(--font-potta_one)"],
-        caprasimo: ["var(--font-caprasimo)"],
-        lora: ["var(--font-lora)"],
+        bungee_spice: ["var(--font-bungee_spice)"],
+        anton: ["var(--font-anton)"],
       },
       colors: {
         color_choklet: "#72585D",

@@ -1,15 +1,12 @@
-import { ChatPlugin } from "@/components/chat-pluggin";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
 import { fontsClass } from "@/fonts";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/providers/modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
-import type { Metadata } from "next";
-import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,10 +32,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            <main className="min-h-screen h-full pt-3">{children}</main>
-            <Footer />
-            <ChatPlugin />
+            {children}
             <ModalProvider />
             <Toaster />
           </ThemeProvider>

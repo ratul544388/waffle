@@ -1,6 +1,7 @@
-import { CartItem, Food } from "@/types";
 import { create } from "zustand";
 import { v4 as uuid } from "uuid";
+import { Food } from "@prisma/client";
+import { CartItem, Extra } from "@/types";
 
 interface CartStore {
   cart: CartItem[];
@@ -14,6 +15,13 @@ interface CartStore {
     quantity: number;
   }) => void;
   deleteCart: (cartItemId: string) => void;
+  addExtra: ({
+    extras,
+    cartItemId,
+  }: {
+    extras: Extra[];
+    cartItemId: string;
+  }) => void;
   clearCart: () => void;
 }
 
@@ -38,10 +46,10 @@ export const useCartStore = create<CartStore>((set) => ({
               : item
           );
         } else {
-          newCart = [...state.cart, { id: uuid(), food, quantity }];
+          newCart = [...state.cart, { id: uuid(), food, quantity, extras: [] }];
         }
       } else {
-        newCart = [{ id: uuid(), food, quantity }];
+        newCart = [{ id: uuid(), food, quantity, extras: [] }];
       }
       updateLocalStorage(newCart);
       return { cart: newCart };
@@ -70,6 +78,19 @@ export const useCartStore = create<CartStore>((set) => ({
     set(() => {
       updateLocalStorage([]);
       return { cart: [] };
+    }),
+  addExtra: ({ extras, cartItemId }: { extras: Extra[]; cartItemId: string }) =>
+    set((state) => {
+      const updatedCart = state.cart.map((item) =>
+        item.id === cartItemId
+          ? {
+              ...item,
+              extras,
+            }
+          : item
+      );
+      updateLocalStorage(updatedCart);
+      return { cart: updatedCart };
     }),
 }));
 

@@ -5,7 +5,7 @@ import { Crisp } from "crisp-sdk-web";
 import { useEffect } from "react";
 import { OrderSchema } from "@/validations";
 import { OrderItem, User } from "@/types";
-import { calculateTotal, formatPrice } from "@/lib/utils";
+import { calculateTotal, formatPhone, formatPrice } from "@/lib/utils";
 
 export const useCrisp = () => {
   useEffect(() => {
@@ -24,7 +24,7 @@ export const useCrisp = () => {
 
   const openChat = () => {
     Crisp.chat.open();
-  }
+  };
 
   const createOrder = ({
     user: { name, address, phone },
@@ -34,11 +34,21 @@ export const useCrisp = () => {
     orderItems: OrderItem[];
   }) => {
     const separator = `----------------`;
-    const userInfo = `Name: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+
+    const userInfo = `Name: ${name}\nPhone: ${formatPhone(
+      phone
+    )}\nAddress: ${address}`;
     const orderDetails = `${orderItems
       .map(
-        ({ food: { name }, quantity }, index) =>
-          `${index + 1}: ${name} - Qty: ${quantity}\n`
+        ({ food: { name }, quantity, extras }, index) =>
+          `${index + 1}: ${name} - Qty: ${quantity}${
+            !!extras.length
+              ? ` - (${extras
+                  .map((item) => item.label)
+                  .join(" + ")
+                  .toString()})`
+              : ""
+          }\n`
       )
       .join(" ")
       .toString()}`;

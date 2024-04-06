@@ -1,12 +1,14 @@
-import { FoodItem } from "@/components/food-item";
-import { Food, OrderItem } from "@/types";
+import { OrderItem } from "@/types";
+import { Food } from "@prisma/client";
 import { create } from "zustand";
 
-export type ModalType = "orderModal";
+export type ModalType = "createFoodModal" | "updateFoodModal" | "deleteFoodModal" | "orderModal"
 interface ModalData {
+  id?: string;
   name?: string;
   orderItems?: OrderItem[];
   clearCart?: boolean;
+  food?: Food;
 }
 
 interface ModalStore {

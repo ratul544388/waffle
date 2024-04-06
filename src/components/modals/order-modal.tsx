@@ -17,22 +17,16 @@ import { useCartStore } from "@/hooks/use-cart";
 import { useCrisp } from "@/hooks/use-crips";
 import { useModalStore } from "@/hooks/use-modal-store";
 import { useOrderStore } from "@/hooks/use-order-store";
-import { calculateTotal, cn, formatPrice } from "@/lib/utils";
+import { calculateTotal, cn, formatPhone, formatPrice } from "@/lib/utils";
 import { User } from "@/types";
 import { OrderSchema } from "@/validations";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { Check, EditIcon, X } from "lucide-react";
+import { Check, EditIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { MotionButton } from "../motion-button";
 import { OrderItem } from "../order-item";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-} from "../ui/dialog";
-import { toast } from "sonner";
+import { Modal } from "./modal";
 
 export const OrderModal = () => {
   const { isOpen, onClose, type, data } = useModalStore();
@@ -103,120 +97,113 @@ export const OrderModal = () => {
 
   const total = calculateTotal(orders);
 
+  const title = orders?.length > 1 ? "Order" : `Order ${orders[0]?.food.name}`;
+  const description = "Confirm your order";
+
   return (
-    <Dialog open={isOpen && type === "orderModal"} onOpenChange={onClose}>
-      <DialogContent className="max-h-[100dvh] overflow-auto p-0 gap-0">
-        <DialogHeader className="sticky top-0 bg-background z-10 p-5">
-          <DialogTitle className="font-lemon">Order {data.name}</DialogTitle>
-          <DialogDescription>Confirm your order</DialogDescription>
-          <Button
-            onClick={onClose}
-            className="absolute top-1 right-2"
-            size="icon"
-            variant="ghost"
-          >
-            <X className="size-6" />
-          </Button>
-        </DialogHeader>
-        <Form {...form}>
-          <form
-            className={cn(
-              "flex flex-col gap-6 px-5 py-2",
-              isEditingUserInfo && "pt-12"
-            )}
-          >
-            {user && !isEditingUserInfo && (
-              <ul className="flex flex-col items-start relative bg-secondary text-muted-foreground border rounded-xl p-4 text-xs font-medium font-inter">
-                {[name, phone, address].map((item, index) => (
-                  <li key={index} className="line-clamp-1 text-start">
-                    {item}
-                  </li>
-                ))}
+    <Modal
+      open={isOpen && type === "orderModal"}
+      title={title}
+      description={description}
+    >
+      <Form {...form}>
+        <form
+          className={cn(
+            "flex flex-col gap-6 px-5 py-1",
+            isEditingUserInfo && "pt-12"
+          )}
+        >
+          {user && !isEditingUserInfo && (
+            <ul className="flex flex-col items-start relative bg-secondary text-muted-foreground border rounded-xl p-4 text-xs font-medium font-inter">
+              {[name, formatPhone(phone), address].map((item, index) => (
+                <li key={index} className="line-clamp-1 text-start">
+                  {item}
+                </li>
+              ))}
+              <Button
+                type="button"
+                onClick={() => setIsEditingUserInfo(true)}
+                variant="ghost"
+                className="rounded-full absolute text-blue-500 hover:text-blue-500/90 right-2 top-1.5 hover:bg-accent"
+                size="icon"
+              >
+                <EditIcon className="size-4" />
+              </Button>
+            </ul>
+          )}
+          {(isEditingUserInfo || !user) && (
+            <div className="flex flex-col gap-6 relative">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input label="Name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input type="number" phone label="Phone" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input label="Address" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex items-center justify-between absolute top-0 inset-x-0 -translate-y-[calc(100%_+_8px)]">
+                <p className="font-medium text-sm">Update Your Info</p>
                 <Button
                   type="button"
-                  onClick={() => setIsEditingUserInfo(true)}
+                  onClick={form.handleSubmit((values) =>
+                    onSubmit({ values, saveUser: true })
+                  )}
                   variant="ghost"
-                  className="rounded-full absolute text-blue-500 hover:text-blue-500/90 right-2 top-1.5 hover:bg-accent"
+                  className="rounded-full text-black hover:text-black bg-green-500 hover:bg-green-500/90"
                   size="icon"
                 >
-                  <EditIcon className="size-4" />
+                  <Check className="size-4" />
                 </Button>
-              </ul>
-            )}
-            {(isEditingUserInfo || !user) && (
-              <div className="flex flex-col gap-6 relative">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input label="Name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input type="number" phone label="Phone" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input label="Address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="flex items-center justify-between absolute top-0 inset-x-0 -translate-y-[calc(100%_+_8px)]">
-                  <p className="font-medium text-sm">Update Your Info</p>
-                  <Button
-                    type="button"
-                    onClick={form.handleSubmit((values) =>
-                      onSubmit({ values, saveUser: true })
-                    )}
-                    variant="ghost"
-                    className="rounded-full text-black hover:text-black bg-green-500 hover:bg-green-500/90"
-                    size="icon"
-                  >
-                    <Check className="size-4" />
-                  </Button>
-                </div>
               </div>
-            )}
-            <ul className="space-y-4">
-              {orders?.map((item) => (
-                <OrderItem orderItem={item} key={item.id} />
-              ))}
-            </ul>
-          </form>
-        </Form>
-        <div className="py-3 px-5 flex items-center gap-8 sticky bottom-0 w-full bg-background">
-          <div className="text-sm font-bold">
-            <h4>TOTAL:</h4>
-            {formatPrice(total)}
-          </div>
-          <MotionButton
-            onClick={form.handleSubmit((values) => onSubmit({ values }))}
-            className="w-full"
-          >
-            Order
-          </MotionButton>
+            </div>
+          )}
+          <ul className="space-y-4">
+            {orders?.map((item) => (
+              <OrderItem orderItem={item} key={item.id} />
+            ))}
+          </ul>
+        </form>
+      </Form>
+      <div className="py-3 px-5 flex items-center gap-8 sticky bottom-0 w-full bg-background">
+        <div className="text-sm font-bold">
+          <h4>TOTAL:</h4>
+          {formatPrice(total, "icon")}
         </div>
-      </DialogContent>
-    </Dialog>
+        <MotionButton
+          onClick={form.handleSubmit((values) => onSubmit({ values }))}
+          className="w-full"
+        >
+          Order
+        </MotionButton>
+      </div>
+    </Modal>
   );
 };

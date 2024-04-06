@@ -18,13 +18,15 @@ model User {
 }
 
 model Food {
-  id    String   @id @default(cuid())
-  name  String   @unique
-  slug  String   @unique
-  image String
-  type  String
-  extra String[]
-  price Int
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  image       String
+  type        String
+  extras      String[]
+  price       Int
+  description String
+  order       Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

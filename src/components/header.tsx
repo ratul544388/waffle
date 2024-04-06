@@ -1,31 +1,29 @@
 "use client";
 
-import { Container } from "@/container";
+import { UserButton } from "@/app/admin/_components/user-button";
+import { Container } from "@/components/container";
+import { User } from "@prisma/client";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { CartSheet } from "./cart-sheet";
-import { Image } from "./image";
-import { WhileInView } from "./while-in-view";
+import { Logo } from "./logo";
 import { SearchInput } from "./search-input";
+import { WhileInView } from "./while-in-view";
+import { MobileSearchBar } from "./mobile-search-bar";
 
-export const Header = () => {
+export const Header = ({ user }: { user: User | null }) => {
   return (
     <motion.header
       animate={{ opacity: [0, 1], y: [-40, 0], transition: { duration: 0.4 } }}
-      className="flex sticky top-0 z-50 opacity-0 overflow-hidden w-full bg-color_pink"
+      className="flex sticky top-0 z-50 opacity-0 w-full bg-background/40 backdrop-blur-md py-3"
     >
       <Container className="flex items-center justify-between gap-10">
-        <WhileInView x={-30} delay={0.6}>
-          <Link href="/">
-            <Image src="/logos/logo.png" alt="logo" className="size-16" />
-          </Link>
-        </WhileInView>
-        <WhileInView y={-30} delay={0.6} className="w-full hidden sm:block">
-          <SearchInput />
-        </WhileInView>
-        <WhileInView x={30} delay={0.6} className="flex items-center">
+        <Logo />
+        <SearchInput className="hidden sm:block"/>
+        <div className="flex items-center gap-4">
+          <MobileSearchBar/>
           <CartSheet />
-        </WhileInView>
+          {user?.role === "ADMIN" && <UserButton />}
+        </div>
       </Container>
     </motion.header>
   );

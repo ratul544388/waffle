@@ -16,11 +16,11 @@ interface QuantitySelectProps {
 }
 
 export const QuantitySelect = ({ quantity, onChange }: QuantitySelectProps) => {
-  const { updateCart } = useCartStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="xs" variant="outline" className="gap-3">
+        <Button size="xs" variant="outline" className="gap-3 text-muted-foreground">
+          <span>Qty:</span>
           {quantity}
           <ChevronDown className="size-4 text-muted-foreground" />
         </Button>
