@@ -1,33 +1,5 @@
-import { ChefHat, LayoutDashboard, ListOrdered, Settings } from "lucide-react";
-
 export const websiteName = "Waffle and Muscle Juice Bar";
 export const phone = "01434343232";
-
-export const adminNavLinks = [
-  {
-    label: "Dashbaord",
-    href: "/admin/dashboard",
-    icon: LayoutDashboard,
-    disabled: true,
-  },
-  {
-    label: "Foods",
-    href: "/admin/foods",
-    icon: ChefHat,
-  },
-  {
-    label: "Orders",
-    href: "/admin/orders",
-    icon: ListOrdered,
-    disabled: true,
-  },
-  {
-    label: "Settings",
-    href: "/admin/settings",
-    icon: Settings,
-    disabled: true,
-  },
-]
 
 export const foodTypes = [
   {

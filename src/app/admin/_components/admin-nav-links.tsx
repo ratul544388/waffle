@@ -1,8 +1,8 @@
 "use client";
 
 import { Logo } from "@/components/logo";
-import { adminNavLinks } from "@/constants";
 import { cn } from "@/lib/utils";
+import { ChefHat, LayoutDashboard, ListOrdered, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "./user-button";
@@ -13,6 +13,33 @@ interface AdminNavLinksProps {
 
 export const AdminNavLinks = ({ onCloseSidebar }: AdminNavLinksProps) => {
   const pathname = usePathname();
+
+  const adminNavLinks = [
+    {
+      label: "Dashbaord",
+      href: "/admin/dashboard",
+      icon: LayoutDashboard,
+      disabled: true,
+    },
+    {
+      label: "Foods",
+      href: "/admin/foods",
+      icon: ChefHat,
+    },
+    {
+      label: "Orders",
+      href: "/admin/orders",
+      icon: ListOrdered,
+      disabled: true,
+    },
+    {
+      label: "Settings",
+      href: "/admin/settings",
+      icon: Settings,
+      disabled: true,
+    },
+  ]
+
   return (
     <nav className="pt-2.5 flex flex-col h-full min-w-[210px]">
       <Logo className="text-blue-800 px-4" />
