@@ -2,6 +2,7 @@
 
 import { cn, formatPrice } from "@/lib/utils";
 import { Extra } from "@/types";
+import { WhileInView } from "./while-in-view";
 
 interface AddOnsProps {
   extras: Extra[];
@@ -10,7 +11,8 @@ interface AddOnsProps {
 
 export const AddOns = ({ extras, className }: AddOnsProps) => {
   return (
-    <div
+    <WhileInView
+      y={50}
       className={cn(
         "border-4 h-fit border-accent w-fit p-5 px-8 rounded-md mx-auto sm:mx-0",
         className
@@ -25,6 +27,6 @@ export const AddOns = ({ extras, className }: AddOnsProps) => {
           </li>
         ))}
       </ul>
-    </div>
+    </WhileInView>
   );
 };

@@ -55,7 +55,7 @@ const Page = async ({
         <div className="">
           <h1 className="font-bold text-xl font-lemon">{food.name}</h1>
           <p className="font-medium text-sm mt-0.5">{food.type}</p>
-          <p className="mt-3 text-lg font-medium font-anton">
+          <p className="mt-3 text-lg font-semibold font-mono">
             {formatPrice(food.price)}
           </p>
           <ActionButtons food={food} />

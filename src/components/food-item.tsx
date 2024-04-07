@@ -47,14 +47,14 @@ export const FoodItem = ({ food }: FoodItemProps) => {
         <Image src={food.image} alt={food.name} />
         <h3
           className={cn(
-            "font-extrabold text-center uppercase text-lg sm:text-xl md:text-2xl mt-8 font-bungee_spice"
+            "font-extrabold text-center uppercase text-lg sm:text-xl md:text-2xl mt-8 font-bungee_spice line-clamp-2"
           )}
         >
           {food.name}
         </h3>
         <p
           className={cn(
-            "font-bold md:text-lg mt-3 font-abril_fatface"
+            "font-bold md:text-lg mt-3 font-lemon"
           )}
         >
           {food.price} BDT

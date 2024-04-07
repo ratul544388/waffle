@@ -1,28 +1,45 @@
 "use client";
-import * as z from "zod";
 
+import { calculateTotal, formatPhone, formatPrice } from "@/lib/utils";
+import { OrderItem, User } from "@/types";
 import { Crisp } from "crisp-sdk-web";
 import { useEffect } from "react";
-import { OrderSchema } from "@/validations";
-import { OrderItem, User } from "@/types";
-import { calculateTotal, formatPhone, formatPrice } from "@/lib/utils";
+import { useWindowSize } from "usehooks-ts";
 
 export const useCrisp = () => {
+  const { width } = useWindowSize();
+  const isMobile = width <= 640;
   useEffect(() => {
     Crisp.configure("9ed0fbbc-ff1f-434b-b619-053d6534da47", {
       autoload: false,
     });
-  }, []);
+    //@ts-ignore
+    Crisp.setColorTheme("orange");
+    Crisp.chat.onChatClosed(() => {
+      if (isMobile) {
+        hideChat();
+      }
+    });
+    if (isMobile) {
+      hideChat();
+    }
+  }, [isMobile]);
 
-  const hideChat = () => {
+  const closeChat = () => {
     Crisp.chat.close();
   };
 
-  const show = () => {
+  const showChat = () => {
+    if (isMobile) return;
     Crisp.chat.show();
   };
 
+  const hideChat = () => {
+    Crisp.chat.hide();
+  };
+
   const openChat = () => {
+    Crisp.chat.show();
     Crisp.chat.open();
   };
 
@@ -60,5 +77,5 @@ export const useCrisp = () => {
     Crisp.message.send("text", message);
   };
 
-  return { hideChat, createOrder, show, openChat };
+  return { closeChat, createOrder, showChat, openChat };
 };

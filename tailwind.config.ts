@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xs: "500px"
+      },
       fontFamily: {
         inter: ["var(--font-inter)"],
         lemon: ["var(--font-lemon)"],
@@ -85,7 +88,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 } satisfies Config;
 
 export default config;

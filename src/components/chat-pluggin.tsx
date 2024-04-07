@@ -4,11 +4,11 @@ import { useCrisp } from "@/hooks/use-crips";
 import { useEffect } from "react";
 
 export const ChatPlugin = () => {
-  const { show } = useCrisp();
+  const { showChat } = useCrisp();
 
   useEffect(() => {
-    show();
-  }, [show]);
+    showChat();
+  }, [showChat]);
 
-  return <div></div>;
+  return <div className="hidden"></div>;
 };

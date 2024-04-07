@@ -11,14 +11,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useDebounceValue, useOnClickOutside } from "usehooks-ts";
 import { Image } from "./image";
-import { SearchLoader } from "./search-loader";
 
 export const SearchInput = ({
   className,
   isFocused,
+  showPopup = true,
 }: {
   className?: string;
   isFocused?: boolean;
+  showPopup?: boolean;
+  onChange?: (value: string) => void;
 }) => {
   const [value, setValue] = useState("");
   const [debouncedValue] = useDebounceValue(value, 500);
@@ -28,6 +30,7 @@ export const SearchInput = ({
   const [open, setOpen] = useState(false);
   const targetRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [notFound, setNotFound] = useState(false);
 
   useOnClickOutside(targetRef, () => setOpen(false));
 
@@ -36,6 +39,7 @@ export const SearchInput = ({
       startTransition(() => {
         getFoods({ q: debouncedValue, take: 5 }).then((res) => {
           setResults(res);
+          setNotFound(!!!res.length);
         });
       });
     }
@@ -64,8 +68,10 @@ export const SearchInput = ({
         ref={inputRef}
         onFocus={() => setOpen(!!value)}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Search waffles and Juices"
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        placeholder="Search waffles and Drinks"
         className="peer h-9 w-full pl-3 pr-10 placeholder:text-sm outline-none rounded-md focus:ring focus-visible:ring-[1.5px] focus:ring-color_blue text-muted-foreground"
       />
       <button
@@ -74,7 +80,7 @@ export const SearchInput = ({
       >
         <Search className="size-4" />
       </button>
-      {open && (
+      {open && showPopup && (
         <div
           ref={targetRef}
           className="flex flex-col absolute overflow-hidden inset-x-0 rounded-md bg-secondary border py-3 top-full mt-1"
@@ -93,7 +99,7 @@ export const SearchInput = ({
               </div>
             </Link>
           ))}
-          {!!!results.length && (
+          {notFound && (
             <p className="text-muted-foreground font-medium px-3 text-center">
               No results found!
             </p>

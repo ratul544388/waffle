@@ -15,7 +15,7 @@ export const Foods = ({ foods, title }: FoodsProps) => {
       className="flex flex-col overflow-hidden items-center mt-16"
     >
       <Heading>{title}</Heading>
-      <ul className="grid md:grid-cols-3 gap-12 w-full mt-10">
+      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 w-full mt-10">
         {foods.map((item, index) => (
           <FoodItem key={index} food={item} />
         ))}
