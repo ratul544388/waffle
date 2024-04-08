@@ -46,12 +46,12 @@ export const FoodItem = ({ food }: FoodItemProps) => {
         <Image src={food.image} alt={food.name} />
         <h3
           className={cn(
-            "font-extrabold text-center uppercase text-sm xs:text-lg sm:text-xl md:text-2xl mt-8 font-bungee_spice line-clamp-2"
+            "font-extrabold text-center uppercase xs:text-lg sm:text-xl md:text-2xl mt-8 font-bungee_spice line-clamp-2"
           )}
         >
           {food.name}
         </h3>
-        <p className={cn("font-bold text-sm md:text-lg mt-3 font-lemon")}>
+        <p className={cn("font-bold md:text-lg mt-3 font-lemon")}>
           {food.price} BDT
         </p>
       </MotionLink>
