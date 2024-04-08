@@ -1,69 +1,81 @@
+"use client";
+
 import { PhoneCall } from "lucide-react";
-import { Image } from "./image";
 import {
   deliveryAvailable,
   deliveryPartners,
+  foodPandaLink,
   phone,
   servings,
+  socialLinks,
   websiteName,
 } from "@/constants";
 import Link from "next/link";
 import { Container } from "@/components/container";
+import Image from "next/image";
+import { FaPhone } from "react-icons/fa6";
+import { toast } from "sonner";
 
 export const Footer = () => {
   return (
     <footer className="uppercase mt-20">
       <Container
         element="section"
-        className="pt-20 px-10 pb-14 flex gap-10 flex-wrap bg-neutral-800 justify-between"
+        className="pt-20 px-12 pb-14 flex gap-10 flex-wrap justify-center sm:justify-between bg-orange-500 font-lemon"
       >
-        <div className="font-bold">
-          <Image
-            src="/logos/logo.png"
-            alt="Logo"
-            className="size-32 bg-color_pink border-4 border-orange-950 rounded-full"
-          />
-          <h2 className="mt-5">Call us for order</h2>
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="text-xl">Call us for order</h2>
           <div className="flex items-center gap-2">
-            <PhoneCall className="size-4" />
-            {phone}
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="font-extrabold text-lg">NOW SERVING</h2>
-          {servings.map(({ label, map }) => (
-            <Link
-              href={map}
-              key={label}
-              className="font-semibold hover:underline decoration-orange-500"
+            <FaPhone className="size-4" />
+            <p
+              onClick={() => {
+                navigator.clipboard.writeText(phone);
+                toast.success("Phone number copied");
+              }}
+              className="font-mono cursor-pointer text-lg font-bold"
             >
-              {label}
-            </Link>
-          ))}
+              {phone}
+            </p>
+          </div>
         </div>
-        <div className="flex items-center flex-col gap-6">
-          <div className="flex items-center gap-3">
-            {deliveryPartners.map(({ image, href, label }) => (
-              <Link href={href} key={label}>
-                Image
-              </Link>
+        <div className="flex flex-col gap-3 items-center">
+          <h2 className="font-semibold text-xl">Order via</h2>
+          <Link href={foodPandaLink} className="bg-white py-2 px-4">
+            <Image
+              src="/foodpanda.svg"
+              alt="foodpanda"
+              width={190}
+              height={40}
+              className="object-cover"
+            />
+          </Link>
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <h2 className="text-xl">Connect with us</h2>
+          <ul className="flex gap-3">
+            {socialLinks.map(({ image, label, href }) => (
+              <li key={label}>
+                <Link href={href} key={href}>
+                  <Image
+                    src={image}
+                    alt={label}
+                    width={40}
+                    height={40}
+                    className="object-cover"
+                  />
+                </Link>
+              </li>
             ))}
-          </div>
-          <div className="mt-6 flex flex-col items-center">
-            <h2 className="font-extrabold text-lg">Delivery Available</h2>
-            {deliveryAvailable.map((item) => (
-              <p key={item} className="font-semibld text-sm">
-                {item}
-              </p>
-            ))}
-          </div>
+          </ul>
         </div>
       </Container>
       <Container
         element="section"
         className="py-8 flex justify-center bg-neutral-900 text-sm font-medium text-white"
       >
-        <p className="text-center text-sm">© 2024 {websiteName} | ALL RIGHT RESOLVED</p>
+        <p className="text-center text-sm">
+          © 2024 {websiteName} | ALL RIGHT RESOLVED
+        </p>
       </Container>
     </footer>
   );

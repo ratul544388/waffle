@@ -1,12 +1,6 @@
-import {
-  Anton,
-  Bungee_Spice,
-  Inter,
-  Lemon
-} from "next/font/google";
+import { Bungee_Spice, Inter, Lemon } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-
 
 const lemon = Lemon({
   subsets: ["latin"],
@@ -21,13 +15,7 @@ const bungee_spice = Bungee_Spice({
   variable: "--font-bungee_spice",
   adjustFontFallback: false,
 });
-const anton = Anton({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-anton",
-  adjustFontFallback: false,
-});
 
 // export const fontsClass = `${inter.variable}`
 
-export const fontsClass = `${inter.variable} ${lemon.variable} ${anton.variable} ${bungee_spice.variable}`;
+export const fontsClass = `${inter.variable} ${lemon.variable} ${bungee_spice.variable}`;

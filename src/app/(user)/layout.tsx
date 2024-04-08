@@ -21,8 +21,8 @@ export default async function AdminLayout({
     <>
       <Header user={user} />
       <main className="min-h-screen pt-3">{children}</main>
-      <MobileBottomNavbar />
       <Footer />
+      <MobileBottomNavbar />
       <ChatPlugin />
     </>
   );

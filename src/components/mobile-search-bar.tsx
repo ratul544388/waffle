@@ -45,6 +45,7 @@ export const MobileSearchBar = ({}: MobileSearchBarProps) => {
           },
         }}
         initial="closed"
+        transition={{ duration: 0.5 }}
         animate={open ? "open" : "closed"}
         className="fixed flex h-[65px] items-center gap-2 bg-background z-50 inset-x-0 top-0 px-4"
       >

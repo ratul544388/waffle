@@ -1,5 +1,6 @@
 export const websiteName = "Waffle and Muscle Juice Bar";
-export const phone = "01434343232";
+export const phone = "+8801434343232";
+export const foodPandaLink = "https://foodpanda.com"
 
 export const foodTypes = [
   {
@@ -56,3 +57,21 @@ export const deliveryPartners = [
 ];
 
 export const deliveryAvailable = ["Kaligonj", "Zinzira"];
+
+export const socialLinks = [
+  {
+    label: "facebook",
+    image: "/social/facebook.png",
+    href: "https://facebook.com",
+  },
+  {
+    label: "instagram",
+    image: "/social/instagram.png",
+    href: "https://instagram.com",
+  },
+  {
+    label: "youtube",
+    image: "/social/youtube.png",
+    href: "https://youtube.com",
+  },
+]

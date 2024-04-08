@@ -32,7 +32,7 @@ export const MobileBottomNavbar = () => {
   return (
     <motion.nav
       animate={{ opacity: [0, 1], y: [30, 0], transition: { duration: 0.5 } }}
-      className="fixed opacity-0 flex items-center justify-between bg-neutral-900 bottom-0 inset-x-0 h-[60px] px-3 sm:hidden"
+      className="sticky opacity-0 flex items-center justify-between bg-neutral-900 bottom-0 inset-x-0 h-[60px] px-3 sm:hidden"
     >
       {links.map(({ icon: Icon, href }, index) => (
         <Link
