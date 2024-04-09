@@ -4,6 +4,7 @@ import { Foods } from "./_components/foods";
 import { Hero } from "./_components/hero";
 import { AddOns } from "@/components/add-ons";
 import { extras } from "@/constants";
+import { NeonText } from "@/components/neon-text";
 
 export default async function Home() {
   const waffles = await db.food.findMany({
@@ -23,7 +24,7 @@ export default async function Home() {
       <Hero />
       <Foods foods={waffles} title="Waffles" />
       <Foods foods={drinks} title="Drinks" />
-      <AddOns extras={extras} className="sm:mx-auto mt-16"/>
+      <AddOns extras={extras} className="sm:mx-auto mt-16" />
       <Artboard />
     </>
   );

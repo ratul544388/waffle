@@ -4,20 +4,34 @@ import { Foods } from "@/components/foods";
 import { foodTypes } from "@/constants";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
-import React from "react";
 
-const Page = async ({ params }: { params: { food_type: string } }) => {
-  const type = foodTypes.find((type) => type.slug === params.food_type)?.label;
+interface PageProps {
+  params: { food_type: string };
+}
+
+export function generateMetadata({ params: { food_type } }: PageProps) {
+  const type = foodTypes.find((type) => type.slug === food_type)?.label || "";
+  return {
+    title: type,
+  };
+}
+
+const getTypeBySlug = (slug: string) => {
+  return foodTypes.find((type) => type.slug === slug)?.label as string;
+};
+
+const Page = async ({ params: { food_type } }: PageProps) => {
+  const type = getTypeBySlug(food_type);
+
+  if (!type) {
+    notFound();
+  }
 
   const foods = await db.food.findMany({
     where: {
       type,
     },
   });
-
-  if (!type) {
-    notFound();
-  }
 
   return (
     <Container className="flex flex-col gap-4">
