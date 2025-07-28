@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧇 Waffle & Muscle Juice Bar – Local Food Ordering Web App
 
-## Getting Started
+**Waffle & Muscle Juice Bar** is a real-time local food ordering web application built for a client to showcase and sell a variety of delicious waffle dishes and muscle-friendly juice items. Customers can easily browse categorized menus and place orders, which are instantly received by the food cart owner for efficient preparation.
 
-First, run the development server:
+🔗 [Live Website](https://waffle-two.vercel.app)  
+📁 [GitHub Repository](https://github.com/ratul544388/waffle)
+
+---
+
+## 🛠️ Tech Stack
+
+### 🔹 Frontend
+- **Framework**: Next.js
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Routing**: App Router
+- **Animation**: Framer Motion
+- **Components**: ShadCN UI
+- **Authentication**: Clerk
+- **Form Handling**: React Hook Form + Zod
+
+### 🔹 Backend
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **API Routes**: RESTful API with Next.js App Router
+- **Image Upload**: Cloudinary
+
+---
+
+## ✨ Features
+
+- 🍽️ Dynamic menu with category-based filtering
+- 🛒 Smooth ordering experience with cart functionality
+- ✅ Authentication with Clerk (Sign in/Sign up)
+- 📦 Real-time order management for vendors
+- 🌐 Responsive and mobile-friendly UI
+- 🧾 Admin order tracking interface
+- 🔒 Secure checkout flow with validation
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/ratul544388/waffle
+````
+
+### 2. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Set up environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory and add the necessary environment variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+DATABASE_URL=your_postgresql_database_url
+CLERK_SECRET_KEY=your_clerk_secret_key
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_public_key
+CLOUDINARY_API_KEY=your_cloudinary_key
+CLOUDINARY_API_SECRET=your_cloudinary_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+```
 
-## Learn More
+### 4. Push Prisma schema & start the app
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx prisma db push
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📌 License
 
-## Deploy on Vercel
+This project is for a local client and not licensed for redistribution.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+```
