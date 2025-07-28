@@ -20,7 +20,7 @@
 - **Form Handling**: React Hook Form + Zod
 
 ### 🔹 Backend
-- **Database**: PostgreSQL
+- **Database**: MongoDB
 - **ORM**: Prisma
 - **API Routes**: RESTful API with Next.js App Router
 - **Image Upload**: Cloudinary
@@ -57,7 +57,7 @@ npm install
 Create a `.env` file in the root directory and add the necessary environment variables:
 
 ```
-DATABASE_URL=your_postgresql_database_url
+DATABASE_URL=mongodb_database_url
 CLERK_SECRET_KEY=your_clerk_secret_key
 CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_public_key
